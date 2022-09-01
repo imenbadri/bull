@@ -27,13 +27,13 @@
                             Home
                         </a>
                         </li>
-                        @auth
+                        
                         <li>
                         <a href="{{ route('list')}}" class="nav-link text-white">
                             Links
                         </a>
                         </li>
-                        @endauth
+                        
                     </ul>
                     @if(!\Auth::check())
                     <div class="px-3 py-2">

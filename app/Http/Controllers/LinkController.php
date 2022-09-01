@@ -15,8 +15,14 @@ class LinkController extends Controller
     public function listAll(){
        
         $urls = \AshAllenDesign\ShortURL\Models\ShortURL::latest()->get();
-        $data = compact('urls');
-        return view('home', $data);  
+        $links = Links::latest()->get();
+        if($links->count() < 20){
+            $data = compact('urls');
+            return view('home', $data);  
+        }else {
+
+            return back()->with('failed','limited links. ');
+        }
     }
     /**
      * List All Links.
@@ -40,7 +46,7 @@ class LinkController extends Controller
 
         $links = Links::where('user_id', '1')->get();
         
-        if($links->count() < 6){
+        if($links->count() < 5){
             $builder = new \AshAllenDesign\ShortURL\Classes\Builder();
 
             $shortURLObject = $builder->destinationUrl(request()->url)->make();
