@@ -67,7 +67,8 @@ class LinkController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function delete($id){
-       
+
+       Links::where('link_id', $id)->get()->first()->delete();
         $shortURLObject = \AshAllenDesign\ShortURL\Models\ShortURL::whereId($id)->first()->delete();
 
         return back()->with('success','URL Deleted. ');
